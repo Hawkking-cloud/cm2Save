@@ -106,3 +106,6 @@ ipcMain.on('openSaves',()=>{
 ipcMain.on('rename',(event,arg)=>{
     fs.rename(savePath+"/"+arg[0],savePath+"/"+arg[1]+".txt",()=>{})
 })
+ipcMain.on('uninstall',()=>{
+    exec("C:\Users\dbadb\AppData\Local\Programs\cm2save\Uninstall cm2save.exe",()=>{});
+})

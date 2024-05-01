@@ -1,6 +1,6 @@
 {
   "name": "cm2save",
-  "version": "1.0.1",
+  "version": "1.0.12",
   "description": "A essential register save manager for Circuit Maker 2",
   "main": "main.js",
   "scripts": {

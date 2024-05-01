@@ -2,10 +2,14 @@ const sContainer = document.getElementById('settingsPage')
 const sBlurDiv = document.getElementById('blurdiv4')
 let sBlur=false;
 const settingsVar=[
+{"name":"Full Version","type":"notice","alias":"","text":"1.0.12"},
+
 {"name":"Decode blocks when opening saves: ","type":"toggle","alias":"decodeBlocks"},
 {"name":"Quick-Delete Button (RESTART APP): ","type":"toggle","alias":"quickDel"},
+
 {"name":"Open TXT File Cache","type":"button","alias":"","onclick":()=>{api.send("openCache")},},
 {"name":"Open Saves Folder","type":"button","alias":"","onclick":()=>{api.send("openSaves")},},
+
 ]
 const Settings2 = {}
 sContainer.style.display='none';
@@ -43,7 +47,19 @@ for(let i=0;i<settingsVar.length;i++){
         settingButton2.style.height="50px";
         settingButton2.style.borderRadius='500px'; 
         settingButton2.style.backgroundColor="rgb(175,175,175)"
+        if(setting2.color!=undefined){
+            settingButton2.style.backgroundColor=setting2.color
+        }
         settingButton2.onclick=setting2.onclick
+        
+    }
+    if(setting2.type=="notice"){
+        let noticeText = document.createElement('p')
+        newSettingDiv.append(noticeText)
+        noticeText.innerHTML=": "+setting2.text
+        Settings2[alias]=!(Settings2[alias]=='true')
+        Settings2[alias]=!(Settings2[alias])
+        
     }
 }
 function openSettings(){   

@@ -6,7 +6,6 @@ containerDiv3.style.display='none';
 function editTXT(data){
     api.send('edit', data)
 }
-splitted[6]
 function editSave2(path,title,data,tags){    
     blurdiv3.onclick=null
     blurred3=true;
