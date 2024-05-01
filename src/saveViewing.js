@@ -57,6 +57,23 @@ function addSave(s){
     openButton.style.fontOpticalSizing='auto';
     openButton.style.fontStyle="normal";
     openButton.onclick=()=>{openSave(newDiv)}
+    const delButton = document.createElement('button')
+    newDiv.append(delButton)
+    delButton.innerHTML="Delete"
+    delButton.style.backgroundColor="rgb(125,0,0)"
+    delButton.style.borderRadius="15px";
+    delButton.style.width="125px";
+    delButton.style.color="white";
+    delButton.style.height="30px";
+    delButton.style.marginTop = "5px"
+    delButton.style.fontFamily= "Comfortaa, sans-serif" ;
+    delButton.style.fontOpticalSizing='auto';
+    delButton.style.fontStyle="normal";
+    delButton.onclick=()=>{
+        api.send('delete', splitted[6])
+        newDiv.remove()
+    }
+    Settings2.quickDel==true?delButton.style.display="":delButton.style.display="none";
 
     const centerer = document.createElement("div")
     centerer.style.justifyContent="center"
@@ -94,6 +111,6 @@ function addSave(s){
             copyButton.style.backgroundColor='red'
         }
     }
-
+    
 }
 //addSave(testData)

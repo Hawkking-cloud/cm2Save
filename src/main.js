@@ -36,7 +36,17 @@ app.whenReady().then(() => {
                 myWindow.webContents.executeJavaScript(`addSave("${data+'|'+file}")`);
             })
         })
-    }) 
+    }) ;
+    myWindow.on('closed', () => {
+        fs.readdir(txtPath, (err, files) => {
+            if (err) return;
+    
+            files.forEach(file => {
+                const filePath = path.join(txtPath, file);
+                fs.unlink(filePath, () => {});
+            });
+        });
+    });
 }); 
 function generateRandomString() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -47,7 +57,7 @@ function generateRandomString() {
     return result;
   }
 ipcMain.on('write',(event, arg)=>{
-    let string = generateRandomString()+'.txt'
+    let string = arg.split("|")[0]+'.txt'
     fs.writeFile(savePath+'/'+string, arg, (err)=>{
         return;
     });
@@ -62,7 +72,7 @@ ipcMain.on('edit',(event, arg)=>{
     return;
 })
 ipcMain.on('delete',(event, arg)=>{
-    fs.unlink(savePath+arg, (err)=>{
+    fs.unlink(savePath+"/"+arg, (err)=>{
         return;
     });
     return;
@@ -92,4 +102,7 @@ ipcMain.on('openCache',()=>{
 })
 ipcMain.on('openSaves',()=>{
     exec(`start "" "${path.resolve(savePath)}"`);
+})
+ipcMain.on('rename',(event,arg)=>{
+    fs.rename(savePath+"/"+arg[0],savePath+"/"+arg[1]+".txt",()=>{})
 })

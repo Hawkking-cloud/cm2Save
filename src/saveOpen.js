@@ -46,6 +46,9 @@ function openSave(save){
     document.getElementById("deleteSaveButton").onclick=()=>{
         api.send('delete', save.path)
         document.getElementById(save.id).remove()
+        blurred=false;
+        blurdiv.style.filter = 'blur(0px)'
+        containerDiv.style.display='none'
     }
     document.getElementById("convertSaveButton").onclick=()=>{
         api.send('convert', save.path)

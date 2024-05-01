@@ -3,7 +3,7 @@ const sBlurDiv = document.getElementById('blurdiv4')
 let sBlur=false;
 const settingsVar=[
 {"name":"Decode blocks when opening saves: ","type":"toggle","alias":"decodeBlocks"},
-{"name":"Wipe TXT File Cache","type":"button","alias":"","onclick":()=>{api.send("wipeCache")},},
+{"name":"Quick-Delete Button (RESTART APP): ","type":"toggle","alias":"quickDel"},
 {"name":"Open TXT File Cache","type":"button","alias":"","onclick":()=>{api.send("openCache")},},
 {"name":"Open Saves Folder","type":"button","alias":"","onclick":()=>{api.send("openSaves")},},
 ]
