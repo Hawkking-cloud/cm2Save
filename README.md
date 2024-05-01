@@ -8,4 +8,15 @@ Ever been annoyed at the in-game cm2 limitations? look no further! heres cm2Save
 - Built-In Zero stripper option to saves
 - Design Updates
 - Themes
-- DPaste.com Implentation
+- DPaste.com
+- Importing Save data from .txt's
+- Importing Saves
+
+ > ## Update 1.0.1 - MAJOR bug fixes
+- made saves unique
+- made saves use actual file names
+- added more fiddling security
+- fixed bug where deleting wouldnt delete
+- made editting a save actually rename it
+- removed cache wiping
+- cache wipes everytime you close the app
