@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cm2Save</title>
+    <style>
+        body {
+            background-color: rgb(65, 65, 65);
+          }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div style="z-index:8000;justify-content:center;display:flex;align-items:center">
+        <div id="saveEditorDiv" style="z-index:9000;position:fixed;width:80vw;height:50vh;background-color:rgb(121, 121, 121);margin-top:750px;border-radius:50px;display:grid;">
+            <div id="titleCard"style="border:1px solid rgb(48, 48, 48);display: inline-block;border-top-left-radius: 50px;border-bottom-right-radius:15px;background-color:rgb(99, 99, 99);">
+                <p id="editTitle" style="color:white;font-size:25px;font-family:'Comfortaa', sans-serif;margin-left:10px;margin-right:15px;width:auto">test</p>
+                
+            </div>
+            <style>
+                #saveDataDisplay::-webkit-scrollbar {
+                    display: none; 
+                }
+                #saveDataDisplay {
+                    scrollbar-width: none;
+                    -ms-overflow-style: none; 
+                }
+            </style>
+            <div style="display:flex;justify-content:center;margin-top:15px;"><div style="background-color:rgb(107, 107, 107);width:100%;height:2px;"></div></div>
+            <div style="display:flex;margin-top:15px;">
+                <div style="width:50%;background-color:rgb(56, 56, 56);height:100%;color:white;font-family:'Comfortaa',sans-serif;display:grid" >
+                    <textarea style="background-color:rgb(56, 56, 56);color:white;font-family:'Comfortaa',sans-serif;width:90%;overflow-y: auto;;resize: none;height:100px;outline:none;border:none;"id="saveDataDisplay" readonly>  
+
+                    </textarea>
+                    <div style="align-items:center;justify-content:center;display:grid;grid-template-columns: 1fr;"><button style="background-color:green;margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;" id="editSaveButton">Edit</button>
+                        <button style="background-color:rgb(0, 128, 128);margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;">Render (WIP)</button>
+                        <button style="background-color:rgb(128, 0, 0);margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;" id="deleteSaveButton">Delete</button>
+                        <button style="background-color:rgb(55, 0, 128);margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;" id="convertSaveButton">Convert To TXT</button>
+                    </div>
+                </div>
+                
+                <div style="width:50%;background-color:rgb(104, 104, 104);height:100%">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="z-index:8000;justify-content:center;display:flex;align-items:center">
+        <div id="saveCreatorDiv" style="z-index:9000;position:fixed;width:80vw;height:50vh;background-color:rgb(121, 121, 121);margin-top:750px;border-radius:50px;">
+            <div style="display:grid;justify-content:center;grid-gap:15px;">
+                <input id='createTitle'style="border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;width:50vw;margin-top:15px;height:55px" placeholder="Title"></input>
+
+                <input id='createSave'style="border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;width:50vw;margin-top:15px;height:55px" placeholder="Save"></input>
+
+                
+                <input id='createTags'style="border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;width:50vw;margin-top:15px;height:55px" placeholder="Tags(seperate with commas)"></input>
+
+                <button id='createButton'style="border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;width:50vw;margin-top:15px;height:55px">Save</button>
+
+                <p id="createOutput"style="color:white;font-family:'Comfortaa', sans-serif;"></p>
+            </div>
+            
+        </div>
+    
+    </div>
+    <div style="z-index:8000;justify-content:center;display:flex;align-items:center">
+        <div id="saveEditorDiv2" style="z-index:9000;position:fixed;width:80vw;height:50vh;background-color:rgb(121, 121, 121);margin-top:750px;border-radius:50px;">
+            <div style="display:grid;justify-content:center;grid-gap:15px;">
+                <input id='editTitle2'style="border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;width:50vw;margin-top:15px;height:55px" placeholder="Title"></input>
+
+                <input id='editSave'style="border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;width:50vw;margin-top:15px;height:55px" placeholder="Save"></input>
+
+                
+                <input id='editTags'style="border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;width:50vw;margin-top:15px;height:55px" placeholder="Tags(seperate with commas)"></input>
+
+                <button id='editButton'style="border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;width:50vw;margin-top:15px;height:55px">Save</button>
+
+                <p id="editOutput"style="color:white;font-family:'Comfortaa', sans-serif;"></p>
+            </div>
+        </div>
+    </div>
+    <div style="z-index:8000;justify-content:center;display:flex;align-items:center">
+        <div id="settingsPage" style="z-index:9000;position:fixed;width:80vw;height:50vh;background-color:rgb(121, 121, 121);margin-top:750px;border-radius:50px;">
+            <div style="display:grid;justify-content:center;grid-gap:15px;">
+                <div style="margin-top:10px;width:50vw;height:auto;background-color:rgb(75, 75, 75);display:flex;justify-content:center;border-radius:15px">
+                    <p style="margin-left:5px;margin-right:5px;color:white;font-size:15px;font-family:'Comfortaa', sans-serif;">Settings</p>
+                </div>
+                
+            </div>
+            <div style="display:grid;justify-content:center;width:100%">
+                <div style="margin-top:5px;width:100%;height:auto;background-color:rgb(102, 102, 102);display:grid;justify-content:center;border-radius:15px;" id="settingsContainer">
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="blurdiv4" style="width:95.4vw;height:95.4vh">
+        <div id="blurdiv3" style="width:95.4vw;height:95.4vh">
+        <div id="blurdiv2" style="width:95.4vw;height:95.4vh">
+            <div id="blurdiv" style="width:95.4vw;height:95.4vh">
+                <div style="display:flex;justify-content:center;">
+                    <div style="background-color:rgb(53, 53, 53);border-radius:15px;width:70vw;justify-content:center;display:flex;height:100px;align-items:center;margin-top:10px;">
+                        <p style="color:white;font-size:45px;font-family:'Comfortaa', sans-serif;">cm2Save</p>
+                    </div>
+                </div>
+                <div style="display:flex;justify-content:center;margin-top:10px;">
+                    <button style="background-color:green;width:100px;height:50px;border-radius:15px;color:white;font-family:'Comfortaa', sans-serif;" id="saveButton" onclick="createSave()">Save</button>
+                    <input id='searchbar'style="margin-left:15px;margin-right:15px;border-radius:15px;background-color:rgb(80,80,80);resize:none;border:none;outline:none;color:white;font-size:20px;font-family:'Comfortaa', sans-serif;" placeholder="Search"></input>
+                    <button style="background-color:blue;width:100px;height:50px;border-radius:15px;color:white;font-family:'Comfortaa', sans-serif;" onclick="openSettings()">Settings</button>
+                </div>
+                <div style="display:flex;justify-content:center;margin-top:10px;">
+                    <div style="width:80vw;height:1px;background-color:white;"></div>
+                </div>
+                <div id="saveContainer" style="display:grid;grid-template-columns: 1fr 1fr 1fr;grid-gap:10px;margin-top:15px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+
+    <script src="./cm2jsWEB.js"></script>
+    <script src="./settings.js"></script>
+    <script src="./saveEditor.js"></script>
+    <script src="./saveViewing.js"></script>
+    <script src="./saveCreation.js"></script>
+    <script src="./saveOpen.js"></script>
+    <script src="./dashboard.js"></script>
+</body>
