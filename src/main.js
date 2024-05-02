@@ -65,13 +65,14 @@ ipcMain.on('write',(event, arg)=>{
     return;
 })
 ipcMain.on('edit',(event, arg)=>{
-    
-    fs.writeFile(savePath+'/'+arg[0], arg[1], (err)=>{
+    fs.unlink(savePath+'/'+arg[2],()=>{})
+    fs.writeFile(savePath+'/'+arg[0]+'.txt', arg[1], (err)=>{
         return;
     });
     return;
 })
 ipcMain.on('delete',(event, arg)=>{
+    console.log('delete recieved with ',arg)
     fs.unlink(savePath+"/"+arg, (err)=>{
         return;
     });
@@ -96,16 +97,20 @@ ipcMain.on('wipeCache',()=>{
             fs.unlink(filePath, () => {});
         });
     });
-})
+});
 ipcMain.on('openCache',()=>{
     exec(`start "" "${path.resolve(txtPath)}"`);
-})
+});
 ipcMain.on('openSaves',()=>{
     exec(`start "" "${path.resolve(savePath)}"`);
-})
+});
 ipcMain.on('rename',(event,arg)=>{
+    console.log('rename called with args',arg[0],arg[1])
     fs.rename(savePath+"/"+arg[0],savePath+"/"+arg[1]+".txt",()=>{})
-})
-ipcMain.on('uninstall',()=>{
-    exec("C:\Users\dbadb\AppData\Local\Programs\cm2save\Uninstall cm2save.exe",()=>{});
+});
+ipcMain.on('pathify',async (event,arg)=>{
+    event.returnValue=savePath+'/'+arg
+});
+ipcMain.on('test',()=>{
+    console.log('test called')
 })

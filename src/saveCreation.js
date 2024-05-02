@@ -5,10 +5,10 @@ containerDiv2.style.display='none';
 function saveTXT(data){
     api.send('write', data)
 }
-function checkUnique(s){
+function checkUnique(s,exclude=''){
     const saveContainer2 = document.getElementById("saveContainer")
     for(let i=0;i<saveContainer2.children.length;i++){
-        if(saveContainer2.children[i].id===s)return true;
+        if(saveContainer2.children[i].id===s&&s!=exclude)return true;
     }
     return false;
 }
@@ -30,31 +30,18 @@ function createSave(){
     const button = document.getElementById('createButton')
     const output = document.getElementById('createOutput')
     button.onclick=()=>{
-        output.innerHTML=''
-        let titleData = document.getElementById('createTitle').value
-        let saveData = document.getElementById('createSave').value
-        let tagsData = document.getElementById('createTags').value
+        let titleDataC = document.getElementById('createTitle').value
+        let saveDataC = document.getElementById('createSave').value
+        let tagsDataC = document.getElementById('createTags').value
         output.style.color='rgb(125,0,0)';
-        if(titleData===''||titleData===" "){
-            output.innerHTML="Input something for a title"
-
-        } else if (titleData.indexOf("|")>0) {
-            output.innerHTML="Title can not contain pipes (these: |)"
-        } else if (saveData.indexOf("|")>0) {
-            output.innerHTML="Save can not contain pipes (these: |)"
-        } else if (tagsData.indexOf("|")>0) {
-            output.innerHTML="Tags can not contain pipes (these: |)"
-
-        } else if (checkUnique(titleData)){
-            output.innerHTML="Title must be unique"
-        } else if (saveData===''||saveData===" ") {
-            output.innerHTML="Input a valid save file"
-        } else {
+        const safe2 = check(titleDataC,saveDataC,tagsDataC)
+        
+        if(safe2==''){
             output.style.color='rgb(0,200,0)';
             try {
                 const save = new cm2js.Save();
-                save.import(saveData);
-                saveTXT(`${titleData}|${saveData}|${tagsData}|${save.blocks.length}|${saveData.length}|${save.wires.length}`);
+                save.import(saveDataC);
+                saveTXT(`${titleDataC}|${saveDataC}|${tagsDataC}|${save.blocks.length}|${saveDataC.length}|${save.wires.length}`);
                 output.innerHTML = "Successfully Created!";
                 
                 document.getElementById('createTitle').value="";
@@ -65,6 +52,10 @@ function createSave(){
                 output.innerHTML = "Input a valid save file";
                 output.style.color = "rgb(125,0,0)";
             }
+        } else {
+            output.innerHTML=safe2
         }
+       
+        
     }
 }   

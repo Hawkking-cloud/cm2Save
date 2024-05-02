@@ -70,7 +70,7 @@ function addSave(s){
     delButton.style.fontOpticalSizing='auto';
     delButton.style.fontStyle="normal";
     delButton.onclick=()=>{
-        api.send('delete', splitted[6])
+        api.send('delete', newDiv.id+'.txt')
         newDiv.remove()
     }
     Settings2.quickDel==true?delButton.style.display="":delButton.style.display="none";

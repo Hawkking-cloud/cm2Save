@@ -6,7 +6,42 @@ containerDiv3.style.display='none';
 function editTXT(data){
     api.send('edit', data)
 }
+function check(titleD,saveD,tagD,unique=true){
+    let ret = '';
+    if(titleD===''||titleD===" "){
+        ret="Input something for a title"
+
+    } else if (titleD.indexOf("|")>-1) {
+        ret="Title can not contain pipes (these: |)"
+    } else if (saveD.indexOf("|")>-1) {
+        ret="Save can not contain pipes (these: |)"
+    } else if (tagD.indexOf("|")>-1) {
+        ret="Tags can not contain pipes (these: |)"
+
+    } else if (titleD.indexOf('"')>-1) {
+        ret='Titles can not contain quotes (these: ")'
+    } else if (saveD.indexOf('"')>-1) {
+        ret='Save can not contain quotes (these: ")'
+    } else if (tagD.indexOf('"')>-1) {
+        ret='Tags can not contain quotes (these: ")'
+
+    } else if (titleD.indexOf('_')>-1) {
+        ret='Titles can not contain underscores (these: _)'
+    } else if (saveD.indexOf('_')>-1) {
+        ret='Save can not contain underscores (these: _)'
+    } else if (tagD.indexOf('_')>-1) {
+        ret='Tags can not contain underscores (these: _)'
+
+    } else if (checkUnique(titleD)&&unique){
+        ret="Title must be unique"
+    } else if (saveD===''||saveD===" ") {
+        ret="Input a valid save file"
+    }
+    return ret;
+}
+
 function editSave2(path,title,data,tags){    
+    console.log(path)
     blurdiv3.onclick=null
     blurred3=true;
     blurdiv3.style.filter = 'blur(5px)'
@@ -35,21 +70,8 @@ function editSave2(path,title,data,tags){
         let saveData = document.getElementById('editSave').value
         let tagsData = document.getElementById('editTags').value
         output.style.color='rgb(125,0,0)';
-        if(titleData===''||titleData===" "){
-            output.innerHTML="Input something for a title"
-
-        } else if (titleData.indexOf("|")>0) {
-            output.innerHTML="Title can not contain pipes (these: |)"
-        } else if (saveData.indexOf("|")>0) {
-            output.innerHTML="Save can not contain pipes (these: |)"
-        } else if (tagsData.indexOf("|")>0) {
-            output.innerHTML="Tags can not contain pipes (these: |)"
-
-        } else if (checkUnique(titleData)){
-            output.innerHTML="Title must be unique"
-        } else if (saveData===''||saveData===" ") {
-            output.innerHTML="Input a valid save file"
-        } else {
+        const safe = check(titleData,saveData,tagsData,false)
+        if(safe==''){
             const save = new cm2js.Save();
             let suc = true;
             try {
@@ -61,19 +83,30 @@ function editSave2(path,title,data,tags){
                 output.style.color = "rgb(125,0,0)";
             }
             if(suc){
-                editTXT([path,`${titleData}|${saveData}|${tagsData}|${save.blocks.length}|${saveData.length}|${save.wires.length}`]);
+                output.innerHTML = "Successfully Created!";
+                blurred3=false;
+                blurdiv3.style.filter = 'blur(0px)'
+                containerDiv3.style.display='none'
+                document.getElementById('editTitle2').value=''
+                document.getElementById('editSave').value=''
+                document.getElementById('editTags').value=''
+                editTXT([titleData,`${titleData}|${saveData}|${tagsData}|${save.blocks.length}|${saveData.length}|${save.wires.length}`,path]); 
                 const thingToSet = document.getElementById(title)
                 thingToSet.id=titleData
                 thingToSet.save=saveData
+                thingToSet.path=titleData+'.txt'
                 thingToSet.Tags=tagsData
+                thingToSet.blocks=save.blocks.length
+                thingToSet.raw=saveData.length
+                thingToSet.wires=save.wires.length
                 document.getElementById(title+'-id').innerHTML=titleData;
                 document.getElementById(title+'-id').id=titleData+'-id'
                 output.style.color = "rgb(0,200,0)";
-                if(titleData!=title){
-                    api.send('rename',[path,titleData])
-                }
-                output.innerHTML = "Successfully Created!";
             }
+        } else {
+            output.innerHTML=safe;
         }
+        
+        
     }
 }   

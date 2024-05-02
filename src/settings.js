@@ -2,7 +2,7 @@ const sContainer = document.getElementById('settingsPage')
 const sBlurDiv = document.getElementById('blurdiv4')
 let sBlur=false;
 const settingsVar=[
-{"name":"Full Version","type":"notice","alias":"","text":"1.0.12"},
+{"name":"Full Version","type":"notice","alias":"","text":"1.1.0"},
 
 {"name":"Decode blocks when opening saves: ","type":"toggle","alias":"decodeBlocks"},
 {"name":"Quick-Delete Button (RESTART APP): ","type":"toggle","alias":"quickDel"},
