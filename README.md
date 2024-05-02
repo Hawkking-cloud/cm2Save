@@ -33,7 +33,7 @@ Ever been annoyed at the in-game cm2 limitations? look no further! heres cm2Save
 - removed cache wiping
 - cache wipes everytime you close the app
 
-> ## thing that are gonna change for 1.1.0
+> ## Update 1.1.0 - First stable version!
 > - more security
 >   - now checks for quotes (would break it)
 >   - now checks for underscores (would write into other files)
