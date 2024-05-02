@@ -11,6 +11,7 @@ Ever been annoyed at the in-game cm2 limitations? look no further! heres cm2Save
 - DPaste.com
 - Importing Save data from .txt's
 - Importing Saves
+- Ability to attach images/gifs to saves
 
  > ## Update 1.0.1 - MAJOR bug fixes
 - made saves unique
