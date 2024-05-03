@@ -1,6 +1,8 @@
 const saveContainer = document.getElementById("saveContainer")
 var testData = 'a OR Gate|0,0,0,0,0,???|gate,or|1|13|0'
-
+api.on("addSave",(arg) => {
+    addSave(arg[0]);
+});
 function addSave(s){
     const splitted = s.split('|')
     const data = {title:splitted[0],data:splitted[1],tags:splitted[2],blocks:splitted[3],raw:splitted[4],wires:splitted[5]}
@@ -19,7 +21,7 @@ function addSave(s){
     const title = document.createElement("p")
     newDiv.append(title)
     title.style.color="white"
-    title.innerHTML=data.title
+    title.innerText=data.title
     title.style.marginLeft='10px'
     title.style.fontFamily= "Comfortaa, sans-serif" ;
     title.style.fontOpticalSizing='auto';
@@ -34,7 +36,7 @@ function addSave(s){
 
     const copyButton = document.createElement('button')
     newDiv.append(copyButton)
-    copyButton.innerHTML="Copy"
+    copyButton.innerText="Copy"
     copyButton.style.backgroundColor="rgb(25,25,25)"
     copyButton.style.borderRadius="15px";
     copyButton.style.width="125px";
@@ -47,7 +49,7 @@ function addSave(s){
 
     const openButton = document.createElement('button')
     newDiv.append(openButton)
-    openButton.innerHTML="Open"
+    openButton.innerText="Open"
     openButton.style.backgroundColor="Blue"
     openButton.style.borderRadius="15px";
     openButton.style.width="125px";
@@ -59,7 +61,7 @@ function addSave(s){
     openButton.onclick=()=>{openSave(newDiv)}
     const delButton = document.createElement('button')
     newDiv.append(delButton)
-    delButton.innerHTML="Delete"
+    delButton.innerText="Delete"
     delButton.style.backgroundColor="rgb(125,0,0)"
     delButton.style.borderRadius="15px";
     delButton.style.width="125px";
@@ -88,7 +90,7 @@ function addSave(s){
     saveTextArea.style.height ="30%"
     saveTextArea.style.backgroundColor="rgb(125,125,125)"
     saveTextArea.style.borderRadius="15px";
-    saveTextArea.innerHTML=data.data
+    saveTextArea.innerText=data.data
     saveTextArea.style.color='white';
     saveTextArea.addEventListener('focus', function() {
         this.style.outline = 'none';
@@ -99,6 +101,7 @@ function addSave(s){
     saveTextArea.style.overflow = 'hidden'
     saveTextArea.setAttribute('readonly', true);
     saveTextArea.style.resize = 'none';
+    saveTextArea.id=newDiv.id+'-save'
     copyButton.onclick=()=>{
         try {
             saveTextArea.select();

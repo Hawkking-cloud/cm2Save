@@ -1,6 +1,6 @@
 {
   "name": "cm2save",
-  "version": "1.1.0",
+  "version": "1.1.1-beta2",
   "description": "A essential register save manager for Circuit Maker 2",
   "main": "main.js",
   "scripts": {
@@ -12,7 +12,12 @@
   "author": "Hawk",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^14.0.0",
+    "electron": "^30.0.2",
     "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "isolated": "^3.0.25",
+    "quickjs-emscripten": "^0.29.1",
+    "vm": "^0.1.0"
   }
 }

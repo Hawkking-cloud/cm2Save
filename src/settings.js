@@ -2,7 +2,7 @@ const sContainer = document.getElementById('settingsPage')
 const sBlurDiv = document.getElementById('blurdiv4')
 let sBlur=false;
 const settingsVar=[
-{"name":"Full Version","type":"notice","alias":"","text":"1.1.0"},
+{"name":"Full Version","type":"notice","alias":"","text":"1.1.1-beta2"},
 
 {"name":"Decode blocks when opening saves: ","type":"toggle","alias":"decodeBlocks"},
 {"name":"Quick-Delete Button (RESTART APP): ","type":"toggle","alias":"quickDel"},
@@ -22,7 +22,7 @@ for(let i=0;i<settingsVar.length;i++){
     document.getElementById('settingsContainer').append(newSettingDiv)
     let newSettingName = document.createElement('p')
     newSettingDiv.style.color='white';
-    newSettingName.innerHTML=setting2.name
+    newSettingName.innerText=setting2.name
     newSettingDiv.append(newSettingName)
     if(setting2.type=="toggle"){
         let toggleButton = document.createElement('button')
@@ -56,7 +56,7 @@ for(let i=0;i<settingsVar.length;i++){
     if(setting2.type=="notice"){
         let noticeText = document.createElement('p')
         newSettingDiv.append(noticeText)
-        noticeText.innerHTML=": "+setting2.text
+        noticeText.innerText=": "+setting2.text
         Settings2[alias]=!(Settings2[alias]=='true')
         Settings2[alias]=!(Settings2[alias])
         

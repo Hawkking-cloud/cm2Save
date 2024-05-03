@@ -36,7 +36,7 @@
 
                     </textarea>
                     <div style="align-items:center;justify-content:center;display:grid;grid-template-columns: 1fr;"><button style="background-color:green;margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;" id="editSaveButton">Edit</button>
-                        <button style="background-color:rgb(0, 128, 128);margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;">Render (WIP)</button>
+                        <button style="background-color:rgb(0, 128, 128);margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;" id="renderSaveButton">Render (WIP)</button>
                         <button style="background-color:rgb(128, 0, 0);margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;" id="deleteSaveButton">Delete</button>
                         <button style="background-color:rgb(55, 0, 128);margin-top:5px;width:80%;height:5vh;border-radius:15px;color:white;" id="convertSaveButton">Convert To TXT</button>
                     </div>
@@ -96,13 +96,47 @@
             </div>
         </div>
     </div>
-    <div id="blurdiv4" style="width:95.4vw;height:95.4vh">
+    <div style="z-index:8000;justify-content:center;display:flex;align-items:center">
+        <div id="renderPage" style="z-index:9000;position:fixed;width:80vw;height:90vh;background-color:rgb(121, 121, 121);margin-top:750px;border-radius:50px;">
+            <div style="display:grid;justify-content:center;grid-gap:15px;">
+                <div style="margin-top:10px;width:50vw;height:auto;background-color:rgb(75, 75, 75);display:flex;justify-content:center;border-radius:15px">
+                    <p style="margin-left:5px;margin-right:5px;color:white;font-size:15px;font-family:'Comfortaa', sans-serif;">Render</p>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;">
+                    <canvas id="cm2render" ></canvas>
+                        <script type="importmap">
+                            {
+                            "imports": {
+                                "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+                                "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+                            }}
+                        </script>
+                        <script type="module">
+                            import * as cm2rend from './cm2rend.js';
+                            const canv = document.getElementById('cm2render');
+                            cm2rend.settings.glow=false;
+                            cm2rend.settings.showfps=true;
+                            api.on('render',(arg)=>{
+                                cm2rend.reset()
+                                cm2rend.loadstring(arg[0]);
+                            });
+                        </script> 
+                </div>
+            </div>
+            <div style="display:grid;justify-content:center;width:100%">
+                <div style="margin-top:5px;width:100%;height:auto;background-color:rgb(102, 102, 102);display:grid;justify-content:center;border-radius:15px;" id="settingsContainer">
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="blurdiv5" style="width:95.4vw;height:95.4vh">
+        <div id="blurdiv4" style="width:95.4vw;height:95.4vh">
         <div id="blurdiv3" style="width:95.4vw;height:95.4vh">
         <div id="blurdiv2" style="width:95.4vw;height:95.4vh">
             <div id="blurdiv" style="width:95.4vw;height:95.4vh">
                 <div style="display:flex;justify-content:center;">
                     <div style="background-color:rgb(53, 53, 53);border-radius:15px;width:70vw;justify-content:center;display:flex;height:100px;align-items:center;margin-top:10px;">
-                        <p style="color:white;font-size:45px;font-family:'Comfortaa', sans-serif;">cm2Save 1.1.0</p>
+                        <p style="color:white;font-size:45px;font-family:'Comfortaa', sans-serif;">cm2Save 1.1.1-beta2</p>
                     </div>
                 </div>
                 <div style="display:flex;justify-content:center;margin-top:10px;">
@@ -122,11 +156,15 @@
     
     </div>
 
+    </div>
+
+    
     <script src="./cm2jsWEB.js"></script>
     <script src="./settings.js"></script>
     <script src="./saveEditor.js"></script>
     <script src="./saveViewing.js"></script>
     <script src="./saveCreation.js"></script>
+    <script src="./cm2Rendering.js"></script>
     <script src="./saveOpen.js"></script>
     <script src="./dashboard.js"></script>
 </body>

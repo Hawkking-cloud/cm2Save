@@ -42,18 +42,18 @@ function createSave(){
                 const save = new cm2js.Save();
                 save.import(saveDataC);
                 saveTXT(`${titleDataC}|${saveDataC}|${tagsDataC}|${save.blocks.length}|${saveDataC.length}|${save.wires.length}`);
-                output.innerHTML = "Successfully Created!";
+                output.innerText = "Successfully Created!";
                 
                 document.getElementById('createTitle').value="";
                 document.getElementById('createSave').value="";
                 document.getElementById('createTags').value="";
             } catch (error) {
                 console.error("Error:", error);
-                output.innerHTML = "Input a valid save file";
+                output.innerText = "Input a valid save file";
                 output.style.color = "rgb(125,0,0)";
             }
         } else {
-            output.innerHTML=safe2
+            output.innerText=safe2
         }
        
         

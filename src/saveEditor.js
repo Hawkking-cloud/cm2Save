@@ -6,6 +6,7 @@ containerDiv3.style.display='none';
 function editTXT(data){
     api.send('edit', data)
 }
+const checkSavestring = (str) => str.match(/[0-9,;+?.A-Za-z]*/)?.at(0)?.length == str.length;
 function check(titleD,saveD,tagD,unique=true){
     let ret = '';
     if(titleD===''||titleD===" "){
@@ -34,14 +35,13 @@ function check(titleD,saveD,tagD,unique=true){
 
     } else if (checkUnique(titleD)&&unique){
         ret="Title must be unique"
-    } else if (saveD===''||saveD===" ") {
+    } else if (saveD===''||saveD===" "||(checkSavestring(saveD)==false)) {
         ret="Input a valid save file"
     }
     return ret;
 }
 
 function editSave2(path,title,data,tags){    
-    console.log(path)
     blurdiv3.onclick=null
     blurred3=true;
     blurdiv3.style.filter = 'blur(5px)'
@@ -65,46 +65,49 @@ function editSave2(path,title,data,tags){
     document.getElementById('editSave').value=data
     document.getElementById('editTags').value=tags
     button.onclick=()=>{
-        output.innerHTML=''
+        output.innerText=''
         let titleData = document.getElementById('editTitle2').value
         let saveData = document.getElementById('editSave').value
         let tagsData = document.getElementById('editTags').value
         output.style.color='rgb(125,0,0)';
         const safe = check(titleData,saveData,tagsData,false)
         if(safe==''){
-            const save = new cm2js.Save();
+            let save5 = new cm2js.Save();
             let suc = true;
             try {
-                save.import(saveData);
+                save5.import(saveData);
                 
             } catch (error) {
                 suc=false;
-                output.innerHTML = "Input a valid save file";
+                output.innerText = "Input a valid save file";
                 output.style.color = "rgb(125,0,0)";
             }
             if(suc){
-                output.innerHTML = "Successfully Created!";
+                let blockAmt = saveData=='???'?0:save5.blocks.length
+                output.innerText = "Successfully Created!";
                 blurred3=false;
                 blurdiv3.style.filter = 'blur(0px)'
                 containerDiv3.style.display='none'
                 document.getElementById('editTitle2').value=''
                 document.getElementById('editSave').value=''
                 document.getElementById('editTags').value=''
-                editTXT([titleData,`${titleData}|${saveData}|${tagsData}|${save.blocks.length}|${saveData.length}|${save.wires.length}`,path]); 
+                editTXT([titleData,`${titleData}|${saveData}|${tagsData}|${blockAmt}|${saveData.length}|${save5.wires.length}`,path]); 
                 const thingToSet = document.getElementById(title)
                 thingToSet.id=titleData
                 thingToSet.save=saveData
                 thingToSet.path=titleData+'.txt'
                 thingToSet.Tags=tagsData
-                thingToSet.blocks=save.blocks.length
+                thingToSet.blocks=blockAmt
                 thingToSet.raw=saveData.length
-                thingToSet.wires=save.wires.length
-                document.getElementById(title+'-id').innerHTML=titleData;
+                thingToSet.wires=save5.wires.length
+                document.getElementById(title+'-id').innerText=titleData;
+                document.getElementById(title+'-save').innerText=saveData
+                document.getElementById(title+'-save').id=titleData+'-save'
                 document.getElementById(title+'-id').id=titleData+'-id'
                 output.style.color = "rgb(0,200,0)";
             }
         } else {
-            output.innerHTML=safe;
+            output.innerText=safe;
         }
         
         

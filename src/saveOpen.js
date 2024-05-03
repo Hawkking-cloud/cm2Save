@@ -15,7 +15,7 @@ function openSave(save){
             containerDiv.style.display='none'
         }
     }, 1);
-    document.getElementById('editTitle').innerHTML=save.id
+    document.getElementById('editTitle').innerText=save.id
     if(Settings2.decodeBlocks==true){
         let stringToAdd = '';
         const save2 = new cm2js.Save()
@@ -29,10 +29,10 @@ function openSave(save){
             if(blockInts[i]>0){stringToAdd+=`${blocks[i]}s:${blockInts[i]}\r\n`}
             
         }
-        saveDataDisplay.innerHTML="Raw: "+save.raw+'\r\nBlocks: '+save.blocks+'\r\nWires: '+save.wires+`\r\n${stringToAdd.replace('NaN','').replace('undefined','')}`
+        saveDataDisplay.innerText="Raw: "+save.raw+'\r\nBlocks: '+save.blocks+'\r\nWires: '+save.wires+`\r\n${stringToAdd.replace('NaN','').replace('undefined','')}`
 
     } else {
-        saveDataDisplay.innerHTML="Raw: "+save.raw+'\r\nBlocks: '+save.blocks+'\r\nWires: '+save.wires+'\r\ndecode blocks is disabled in settings'
+        saveDataDisplay.innerText="Raw: "+save.raw+'\r\nBlocks: '+save.blocks+'\r\nWires: '+save.wires+'\r\ndecode blocks is disabled in settings'
 
     }
     
@@ -52,5 +52,12 @@ function openSave(save){
     }
     document.getElementById("convertSaveButton").onclick=()=>{
         api.send('convert', save.path)
+    }
+    
+    document.getElementById("renderSaveButton").onclick=()=>{
+        blurred=false;
+        blurdiv.style.filter = 'blur(0px)'
+        containerDiv.style.display='none'
+        renderSave(save)
     }
 } 
